@@ -6,19 +6,25 @@
 //
 
 import Foundation
+import UIKit
 
-enum Color: Int {
-    case RED
-    case BLUE
-    case BLACK
-    case PALE
+enum CardColor {
+    case Red
+    case Blue
+    case Black
+    case Pale
     
-    var ColorMessage: String {
+    func toUIColor() -> UIColor {
         switch self {
-        case .RED: return "Red Team"
-        case .BLUE: return "Blue Team"
-        case .BLACK: return "Assassin"
-        case .PALE: return "Bystander"
+        case .Red:
+            return UIColor.red
+        case .Blue:
+            return UIColor.blue
+        case .Black:
+            return UIColor.black
+        case .Pale:
+            return UIColor.lightGray
         }
     }
+   
 }

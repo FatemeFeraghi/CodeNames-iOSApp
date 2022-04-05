@@ -10,9 +10,9 @@ import Foundation
 struct Team {
     var players: [Player]
     var hasSpymaster: Bool?
-    var color: Color
+    var color: CardColor
     
-    init(players: [Player], hasSpymaster: Bool, color: Color) {
+    init(players: [Player], hasSpymaster: Bool, color: CardColor) {
         self.players =  players
         self.hasSpymaster = hasSpymaster
         self.color = color

@@ -10,6 +10,10 @@ import UIKit
 
 class CardCell: UICollectionViewCell {
     
+    var card: Card? {
+        didSet { self.configure() }
+    }
+    
     private let cardImageView: UIImageView = {
        let iv = UIImageView()
         iv.image = #imageLiteral(resourceName: "profile")
@@ -88,5 +92,12 @@ class CardCell: UICollectionViewCell {
         wordButton.leadingAnchor.constraint(equalTo: divider.leadingAnchor, constant: 5).isActive = true
         wordButton.trailingAnchor.constraint(equalTo: cardImageView.trailingAnchor).isActive = true
         wordButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    }
+    
+    func configure() {
+        guard let card = card else { return }
+        
+        wordButton.setTitle(card.word, for: .normal)
+        self.backgroundColor = card.color.toUIColor()
     }
 }

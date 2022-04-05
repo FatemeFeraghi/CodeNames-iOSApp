@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import UIKit
 
 struct Card {
-    var color: Color
+    var color: CardColor
     var word: String
     
-    init(color: Color, word: String) {
+    init(color: CardColor, word: String) {
         self.color =  color
         self.word = word
     }

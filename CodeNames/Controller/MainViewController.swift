@@ -12,6 +12,15 @@ private let cardCellIdentifier = "CardCell"
 class MainViewController: UIViewController {
     
     private let headerPanel = HeaderPanel()
+//    private var listOfCards : [Card?] = [] {
+//        didSet { self.configure() }
+//    }
+    var board: [(Card)] = [
+            Card(color: .Red, word: "Fateme"),
+            Card(color: .Blue, word: "Urum"),
+            Card(color: .Black, word: "Matheus")
+        ]
+    
     
     private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -29,10 +38,15 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         configureUI()
     }
-
+//
+//    func configure()
+//    {
+//        listOfCards[0] = Card(color: .Red, word: "Fateme")
+//        listOfCards[1] = Card(color: .Blue, word: "Urum")
+//        listOfCards[2] = Card(color: .Black, word: "Matheus")
+//    }
     
     func configureUI() {
         view.backgroundColor = .white
@@ -70,15 +84,16 @@ extension MainViewController: UICollectionViewDelegate {
 }
 
 // MARK: - UICollectionViewDataSource
-
 extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 25
+        return board.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardCellIdentifier, for: indexPath) as! CardCell
+        cell.card = board[indexPath.row]
+        
         return cell
     }
 }

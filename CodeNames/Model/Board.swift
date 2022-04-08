@@ -10,12 +10,12 @@ import Foundation
 struct Board {
     var size: Int
     var cards: [Card]
-    var key: [Int]
+//    var key: [Int]
     
-    init(size: Int, cards: [Card], key: [Int]) {
+    init(size: Int, cards: [Card]) {
         self.size =  size
         self.cards = cards
-        self.key = key
+//        self.key = key
     }
     
     func assignKey(size: Int) {

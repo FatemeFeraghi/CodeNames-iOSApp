@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class GameLogPanel: UIView {
     
     private let gameLogLabel: UILabel = {

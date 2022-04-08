@@ -8,11 +8,17 @@
 import Foundation
 import UIKit
 
+protocol CardCellDelegate: class {
+    func didTapWordButtonFor(_ card: Card)
+}
+
 class CardCell: UICollectionViewCell {
     
     var card: Card? {
         didSet { self.configure() }
     }
+    
+    weak var delegate: CardCellDelegate?
     
     private let cardImageView: UIImageView = {
        let iv = UIImageView()
@@ -30,6 +36,7 @@ class CardCell: UICollectionViewCell {
         button.backgroundColor = .white
         button.layer.cornerRadius = 1
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleWordButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -64,6 +71,11 @@ class CardCell: UICollectionViewCell {
         self.backgroundColor = UIColor(named: "beige")
 
         applyConstraints()
+    }
+    
+    @objc func handleWordButtonTapped() {
+        guard let card = card else { return }
+        delegate?.didTapWordButtonFor(card)
     }
     
     required init?(coder: NSCoder) {

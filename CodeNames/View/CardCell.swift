@@ -11,7 +11,10 @@ import UIKit
 class CardCell: UICollectionViewCell {
     
     var card: Card? {
-        didSet { self.configure() }
+        didSet {
+            self.configure()
+                        
+        }
     }
     
     private let cardImageView: UIImageView = {
@@ -95,9 +98,14 @@ class CardCell: UICollectionViewCell {
     }
     
     func configure() {
+        
         guard let card = card else { return }
         
         wordButton.setTitle(card.word, for: .normal)
+        
         self.backgroundColor = card.color.toUIColor()
+
+
+        
     }
 }

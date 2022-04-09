@@ -12,14 +12,11 @@ private let cardCellIdentifier = "CardCell"
 class MainViewController: UIViewController {
     
     private let headerPanel = HeaderPanel()
-//    private var listOfCards : [Card?] = [] {
-//        didSet { self.configure() }
-//    }
-    var board: [(Card)] = [
-            Card(color: .Red, word: "Fateme"),
-            Card(color: .Blue, word: "Urum"),
-            Card(color: .Black, word: "Matheus")
-        ]
+
+
+    lazy var board : Board = Board(size: 25)
+    var isSpymaster = false
+
     
     
     private var collectionView: UICollectionView = {
@@ -37,16 +34,23 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("\(board.cards[0].word) + \(board.cards[0].color)")
+        print("\(board.cards[1].word) + \(board.cards[1].color)")
+        print("\(board.cards[2].word) + \(board.cards[2].color)")
         configureUI()
+        
+        
     }
-//
-//    func configure()
-//    {
-//        listOfCards[0] = Card(color: .Red, word: "Fateme")
-//        listOfCards[1] = Card(color: .Blue, word: "Urum")
-//        listOfCards[2] = Card(color: .Black, word: "Matheus")
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.board.assignKey(size: 3)
+    }
+    
+    //Function to alternate spymaster boolean value
+    @objc func changeSpymasterDebug()
+    {
+        self.isSpymaster = !(self.isSpymaster)
+        self.collectionView.reloadData()
+    }
     
     func configureUI() {
         view.backgroundColor = .white
@@ -87,16 +91,26 @@ extension MainViewController: UICollectionViewDelegate {
 extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return board.count
+        return self.board.size
+
     }
     
+    
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardCellIdentifier, for: indexPath) as! CardCell
-        cell.card = board[indexPath.row]
         
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.changeSpymasterDebug), userInfo: nil, repeats: true)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardCellIdentifier, for: indexPath) as! CardCell
+        cell.card = self.board.cards[indexPath.row]
+        
+        if(self.isSpymaster == false)
+        {
+            cell.backgroundColor = .lightGray
+        }
         return cell
     }
 }
+
 
 // MARK: - UICollectionViewDelegateFlowLayout
 

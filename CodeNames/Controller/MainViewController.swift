@@ -20,14 +20,36 @@ class MainViewController: UIViewController {
     var cards: [Card] = [
             Card(color: .Red, word: "Fateme"),
             Card(color: .Blue, word: "Urum"),
-            Card(color: .Black, word: "Matheus")
+            Card(color: .Blue, word: "Matheus"),
+            Card(color: .Red, word: "Fateme"),
+            Card(color: .Blue, word: "Urum"),
+            Card(color: .Red, word: "Matheus"),
+            Card(color: .Red, word: "Fateme"),
+            Card(color: .Blue, word: "Urum"),
+            Card(color: .Blue, word: "Matheus"),
+            Card(color: .Red, word: "Fateme"),
+            Card(color: .Blue, word: "Urum"),
+            Card(color: .Red, word: "Matheus"),
+            Card(color: .Red, word: "Fateme"),
+            Card(color: .Blue, word: "Urum"),
+            Card(color: .Black, word: "Matheus"),
+            Card(color: .Red, word: "Fateme"),
+            Card(color: .Blue, word: "Urum"),
+            Card(color: .Blue, word: "Matheus"),
+            Card(color: .Red, word: "Fateme"),
+            Card(color: .Blue, word: "Urum"),
+            Card(color: .Red, word: "Matheus"),
+            Card(color: .Red, word: "Fateme"),
+            Card(color: .Blue, word: "Urum"),
+            Card(color: .Blue, word: "Matheus"),
+            Card(color: .Red, word: "Matheus")
         ]
     
 //    var cards: [Card] = [] {
 //        didSet { self.configure() }
 //    }
     
-    private lazy var board: Board? = Board(size: 3, cards: cards)
+    private lazy var board: Board? = Board(size: 25, cards: cards)
     
     private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()

@@ -99,7 +99,7 @@ extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.changeSpymasterDebug), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(self.changeSpymasterDebug), userInfo: nil, repeats: true)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardCellIdentifier, for: indexPath) as! CardCell
         cell.card = self.board.cards[indexPath.row]
         

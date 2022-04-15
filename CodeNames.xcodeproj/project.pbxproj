@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		E883CFBD2807AFA300A8BAEA /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = E883CFBC2807AFA300A8BAEA /* Toast.swift */; };
+		E883CFBF280A171800A8BAEA /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = E883CFBE280A171800A8BAEA /* Word.swift */; };
+		E883CFC1280A176100A8BAEA /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = E883CFC0280A176100A8BAEA /* API.swift */; };
+		E883CFC3280A179400A8BAEA /* RandomWordApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E883CFC2280A179400A8BAEA /* RandomWordApi.swift */; };
+		E883CFC5280A17BC00A8BAEA /* DictionaryApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E883CFC4280A17BC00A8BAEA /* DictionaryApi.swift */; };
 		E8A3B5AC27F2A7C4007AFF76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A3B5AB27F2A7C4007AFF76 /* AppDelegate.swift */; };
 		E8A3B5AE27F2A7C4007AFF76 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A3B5AD27F2A7C4007AFF76 /* SceneDelegate.swift */; };
 		E8A3B5B027F2A7C4007AFF76 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A3B5AF27F2A7C4007AFF76 /* ViewController.swift */; };
@@ -35,6 +39,10 @@
 
 /* Begin PBXFileReference section */
 		E883CFBC2807AFA300A8BAEA /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		E883CFBE280A171800A8BAEA /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		E883CFC0280A176100A8BAEA /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		E883CFC2280A179400A8BAEA /* RandomWordApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWordApi.swift; sourceTree = "<group>"; };
+		E883CFC4280A17BC00A8BAEA /* DictionaryApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryApi.swift; sourceTree = "<group>"; };
 		E8A3B5A827F2A7C4007AFF76 /* CodeNames.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeNames.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8A3B5AB27F2A7C4007AFF76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8A3B5AD27F2A7C4007AFF76 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +124,7 @@
 				E8A3B5D327F3872B007AFF76 /* Board.swift */,
 				E8A3B5D527F38768007AFF76 /* Card.swift */,
 				E8A3B5DB27F38C21007AFF76 /* Clue.swift */,
+				E883CFBE280A171800A8BAEA /* Word.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -149,6 +158,9 @@
 			children = (
 				E883CFBC2807AFA300A8BAEA /* Toast.swift */,
 				E8A3B5C727F2AD43007AFF76 /* Extensions.swift */,
+				E883CFC0280A176100A8BAEA /* API.swift */,
+				E883CFC2280A179400A8BAEA /* RandomWordApi.swift */,
+				E883CFC4280A17BC00A8BAEA /* DictionaryApi.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -237,10 +249,14 @@
 				E8F16282280229F500ADF8C0 /* ClueCell.swift in Sources */,
 				E8F1627627FF79CC00ADF8C0 /* BluePlayerPanel.swift in Sources */,
 				E8A3B5AE27F2A7C4007AFF76 /* SceneDelegate.swift in Sources */,
+				E883CFC5280A17BC00A8BAEA /* DictionaryApi.swift in Sources */,
+				E883CFC3280A179400A8BAEA /* RandomWordApi.swift in Sources */,
 				E883CFBD2807AFA300A8BAEA /* Toast.swift in Sources */,
 				E8A3B5C327F2A843007AFF76 /* MainViewController.swift in Sources */,
+				E883CFC1280A176100A8BAEA /* API.swift in Sources */,
 				E8A3B5D027F38488007AFF76 /* Player.swift in Sources */,
 				E8A3B5D227F386FC007AFF76 /* Color.swift in Sources */,
+				E883CFBF280A171800A8BAEA /* Word.swift in Sources */,
 				E8F1627E2800D93B00ADF8C0 /* UIView_shake.swift in Sources */,
 				E8A3B5DC27F38C21007AFF76 /* Clue.swift in Sources */,
 				E8A3B5CA27F2C1A4007AFF76 /* HeaderPanel.swift in Sources */,

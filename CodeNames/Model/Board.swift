@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import UIKit
 
 class Board {
     var size: Int
@@ -19,34 +19,37 @@ class Board {
     var assassin = 1
     var bystanders = 7
     
+    
+    public var arrayOfRandomWords : [String]?
+    public var finalWords : [String]?
+    
     //Hard coded list of cards
     var listOfCards: [(Card)] = [
-            Card(color: .Black, word: "Fateme"),
-            Card(color: .Black, word: "Urum"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus"),
-            Card(color: .Black, word: "Matheus")
-
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: ""),
+            Card(color: .Black, word: "")
         ]
     
     init(size: Int) {
@@ -55,9 +58,9 @@ class Board {
         
         //Call API to set the list of Cards with the required amount here.
         self.cards = listOfCards
-        
-        //Call function to randomically distribute the cards
-        self.assignKey(size: size)
+        RandomWordApi.generateWords(amountOfWords: String(self.size), successHandler: randomWordSuccessHandler, failHandler: randomWordFailHandler)
+
+
     }
     func setSize(size : Int)
     {
@@ -129,5 +132,74 @@ class Board {
     
     func createBoard(size: Int) {
 
+    }
+    
+    func randomWordSuccessHandler(_ httpStatusCode : Int, _ response : [String])
+    {
+        if httpStatusCode == 200
+        {
+            guard let current = response as? [String]
+            else
+            {
+                return
+            }
+            print(current)
+            
+            //Now iterate and check if they are real words
+            self.arrayOfRandomWords = current
+            for word in self.arrayOfRandomWords! {
+                //print("\(word) - \(type(of: word))")
+                DictionaryApi.checkWordExistance(word: word, successHandler: checkExistanceSuccessHandler, failHandler: checkExistanceFailHandler)
+            }
+            
+            let sizeOfArray = self.finalWords?.count == nil ? 0 : self.finalWords!.count
+            let checkSize = self.size - sizeOfArray
+            
+            //After all the words in the arrayOfRandomWords were checked on the dictionary, we will check if we already have the amount of words we needed.
+            if(checkSize > 0)
+            {
+                //The array does not have the required amount of cards, call the API again to generate more words
+                RandomWordApi.generateWords(amountOfWords: String(self.size), successHandler: randomWordSuccessHandler, failHandler: randomWordFailHandler)
+            }
+            else
+            {
+                //This else will be executed when all the cards already were set with a word
+                print(self.finalWords!)
+                
+                
+                //Call function to randomically distribute the cards
+                self.assignKey(size: size)
+            }
+        }
+        
+    }
+    func randomWordFailHandler(_ httpStatusCode : Int, _ errorMessage: String)
+    {
+        print("Error")
+    }
+    func checkExistanceSuccessHandler(_ word : String, _ response : [Word])
+    {
+        let sizeOfArray = self.finalWords?.count == nil ? 0 : self.finalWords!.count
+        
+        //The word exists on the dictionary, before adding it to the final array of words we need to check if the array already have the required amount of words we needed.
+        if(sizeOfArray < self.size)
+        {
+            if(word.count <= 8)
+            {
+                //The ternary operator was used to fix the problem of adding an element to a nil array at first
+                self.finalWords?.count == nil ? self.finalWords = [word] : self.finalWords!.append(word)
+                
+                //Setting the word for each card
+                self.listOfCards[sizeOfArray].word = word
+                
+                print("\nDictionary response -> \(response) - \(type(of: response[0]))")
+            }
+        }
+        
+    
+    }
+    func checkExistanceFailHandler( _ errorMessage: String)
+    {
+        print(errorMessage)
     }
 }

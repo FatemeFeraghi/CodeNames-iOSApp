@@ -11,6 +11,7 @@ class PlayerViewController: UIViewController {
 
     private let bluePlayerPanel = BluePlayerPanel()
     private let redPlayerPanel = RedPlayerPanel()
+    private var board : Board = Board(size: 25)
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -103,6 +104,7 @@ class PlayerViewController: UIViewController {
         navigationController?.pushViewController(controller, animated: true)
         controller.blueTeamPlayers = blueTeamPlayers
         controller.redTeamPlayers = redTeamPlayers
+        controller.board = self.board
     }
 
 

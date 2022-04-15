@@ -14,6 +14,9 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
     private let headerPanel = HeaderPanel()
     private let clueCellPanel = ClueCell()
 
+    var board : Board?
+    var isSpymaster = true
+    
     public var blueTeamPlayers : [Player] = []
     public var redTeamPlayers : [Player] = []
     
@@ -23,9 +26,8 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
     private var blueScore = 0
     private var redScore = 0
 
-    lazy var board : Board = Board(size: 25)
     let clue : Clue = Clue()
-    var isSpymaster = true
+    
     var isTurnOver = false
     var numberOfGuesses: Int = 0
 
@@ -70,7 +72,7 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        self.board.assignKey(size: 3)
+        self.board!.assignKey(size: 3)
     }
     
     //Function to alternate spymaster boolean value
@@ -149,7 +151,7 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
 // MARK: - UICollectionViewDelegate
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let card = board.cards[indexPath.row]
+        let card = board!.cards[indexPath.row]
 
         if card.color == .Black {
             //Team lose game
@@ -163,6 +165,8 @@ extension MainViewController: UICollectionViewDelegate {
             clueCellPanel.txtQuantityClue.text = ""
             clueCellPanel.txtWordClue.text = ""
             self.gameLogPanel.gameLogLabel.text = ""
+        } else {
+            
         }
         
         self.gameLogPanel.gameLogLabel.text! += " \n Player taps \(card.word)"
@@ -174,15 +178,16 @@ extension MainViewController: UICollectionViewDelegate {
 extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.board.size
+        return self.board!.size
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-//        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.changeSpymasterDebug), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(self.changeSpymasterDebug), userInfo: nil, repeats: true)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardCellIdentifier, for: indexPath) as! CardCell
-        cell.card = self.board.cards[indexPath.row]
+        cell.card = self.board!.cards[indexPath.row]
         cell.delegate = self
+        
         if(self.isSpymaster == false)
         {
             cell.backgroundColor = .lightGray

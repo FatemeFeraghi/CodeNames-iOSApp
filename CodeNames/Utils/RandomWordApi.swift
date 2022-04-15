@@ -14,7 +14,7 @@ class RandomWordApi: Decodable {
                              successHandler: @escaping (_ httpStatusCode : Int, _ response : [String]) -> Void,
                              failHandler : @escaping (_ httpStatusCode : Int, _ errorMessage: String) -> Void)
     {
-       
+//    https://random-word-api.herokuapp.com/word?number=\20&swear=0
         let baseURL = "https://random-word-api.herokuapp.com/"
         let endPoint = "word?number=\(amountOfWords)&swear=0"
         let method = "GET"

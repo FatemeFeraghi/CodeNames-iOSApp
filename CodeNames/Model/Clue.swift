@@ -16,6 +16,11 @@ struct Clue {
         
     }
     
+    init() {
+        self.quantity = 0
+        self.word = "Default clue"
+    }
+    
     init(quantity: Int, word: String) {
         self.quantity = quantity
         self.word = word

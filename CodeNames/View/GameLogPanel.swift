@@ -9,13 +9,14 @@ import UIKit
 
 class GameLogPanel: UIView {
     
-    private let gameLogLabel: UILabel = {
+    public var gameLogLabel: UILabel = {
         let label = UILabel()
         label.text = "Game Log:"
-        label.textColor = .white
+        label.textColor = .black
         label.textAlignment = .center
-        label.layer.cornerRadius = 5
-        label.backgroundColor = .lightGray
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.numberOfLines = 10
+        label.backgroundColor = UIColor(named: "LightGrey")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -31,7 +32,7 @@ class GameLogPanel: UIView {
         self.translatesAutoresizingMaskIntoConstraints = false
         addSubviews(gameLogLabel)
 
-        self.backgroundColor = .blue.withAlphaComponent(0.1)
+        self.backgroundColor = UIColor(named: "LightGreen")
         applyConstraints()
     }
     
@@ -44,7 +45,7 @@ class GameLogPanel: UIView {
         gameLogLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         gameLogLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
         gameLogLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        gameLogLabel.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        gameLogLabel.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant:  -20).isActive = true
         
     }
 }

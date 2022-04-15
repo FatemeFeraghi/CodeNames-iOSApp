@@ -8,11 +8,13 @@
 import UIKit
 
 class BluePlayerPanel: UIView {
-
+    
     private var _blueOperativeName: String = ""
     private var _blueSpymasterName: String = ""
     
-    private let txtNameOperative: CustomTextField = {
+    public var blueTeam = Team(players: [], hasSpymaster: false, color: .Blue)
+    
+    private let txtNameBlueOperative: CustomTextField = {
         let tf = CustomTextField(placeholder: "Name")
         tf.keyboardType = .emailAddress
         tf.textColor = .black
@@ -20,7 +22,7 @@ class BluePlayerPanel: UIView {
         return tf
     }()
     
-    private let txtNameSpymaster: CustomTextField = {
+    private let txtNameBlueSpymaster: CustomTextField = {
         let tf = CustomTextField(placeholder: "Name")
         tf.keyboardType = .emailAddress
         tf.backgroundColor = .none
@@ -29,25 +31,25 @@ class BluePlayerPanel: UIView {
         return tf
     }()
     
-    private let btnOperative: UIButton = {
+    let btnBlueOperative: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Join as operative", for: .normal)
         button.tintColor = .white
         button.backgroundColor = .blue
-        button.layer.cornerRadius = 16
+        button.layer.cornerRadius = 12
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(handleOperativeButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleBlueOperativeButtonTapped), for: .touchUpInside)
         return button
     }()
     
-    private let btnSpymaster: UIButton = {
+    let btnBlueSpymaster: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Join as spymaster", for: .normal)
         button.tintColor = .white
         button.backgroundColor = .blue
-        button.layer.cornerRadius = 16
+        button.layer.cornerRadius = 12
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(handleSpymasterButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleBlueSpymasterButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -57,7 +59,7 @@ class BluePlayerPanel: UIView {
         }
         set(newValue) {
             self._blueOperativeName = newValue
-            self.txtNameOperative.text = newValue
+            self.txtNameBlueOperative.text = newValue
         }
     }
     
@@ -67,7 +69,7 @@ class BluePlayerPanel: UIView {
         }
         set(newValue) {
             self._blueSpymasterName = newValue
-            self.txtNameSpymaster.text = newValue
+            self.txtNameBlueSpymaster.text = newValue
         }
     }
     
@@ -82,27 +84,29 @@ class BluePlayerPanel: UIView {
     }
     
     
-    @objc func handleOperativeButtonTapped() {
+    @objc func handleBlueOperativeButtonTapped() {
         
-        guard let name : String = txtNameOperative.text else { return }
+        guard let name : String = txtNameBlueOperative.text else { return }
         
         if name == "" {
-            txtNameOperative.shakeWith(btnOperative)
+            txtNameBlueOperative.shakeWith(btnBlueOperative)
         } else {
-            btnOperative.isHidden = true
-            txtNameOperative.text = "Operative: " + name
+            btnBlueOperative.isHidden = true
+            txtNameBlueOperative.text = "Operative: " + name
+            blueTeam.players.append(Player(id: 1, name: name, role: "operative"))
         }
     }
     
-    @objc func handleSpymasterButtonTapped() {
+    @objc func handleBlueSpymasterButtonTapped() {
         
-        guard let name : String = txtNameSpymaster.text else { return }
+        guard let name : String = txtNameBlueSpymaster.text else { return }
         
         if name == "" {
-            txtNameSpymaster.shakeWith(btnSpymaster)
+            txtNameBlueSpymaster.shakeWith(btnBlueSpymaster)
         } else {
-            btnSpymaster.isHidden = true
-            txtNameSpymaster.text = "Spymaster: " + name
+            btnBlueSpymaster.isHidden = true
+            txtNameBlueSpymaster.text = "Spymaster: " + name
+            blueTeam.players.append(Player(id: 2, name: name, role: "spymaster"))
         }
     }
     
@@ -110,39 +114,39 @@ class BluePlayerPanel: UIView {
         
         self.translatesAutoresizingMaskIntoConstraints = false
         
-        addSubviews(txtNameOperative,
-                    txtNameSpymaster,
-                    btnOperative,
-                    btnSpymaster)
+        addSubviews(txtNameBlueSpymaster,
+                    txtNameBlueOperative,
+                    btnBlueOperative,
+                    btnBlueSpymaster)
 
 //        self.backgroundColor = .systemTeal
         self.backgroundColor = .none
 
         applyConstraints()
         
-        txtNameOperative.text = self._blueOperativeName
-        txtNameSpymaster.text = self._blueSpymasterName
+        txtNameBlueOperative.text = self._blueOperativeName
+        txtNameBlueSpymaster.text = self._blueSpymasterName
     }
     
     private func applyConstraints() {
         
-        txtNameOperative.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        txtNameOperative.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
-        txtNameOperative.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        txtNameBlueOperative.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        txtNameBlueOperative.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
+        txtNameBlueOperative.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        btnOperative.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        btnOperative.topAnchor.constraint(equalTo: self.txtNameOperative.bottomAnchor, constant: 10).isActive = true
-        btnOperative.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        btnOperative.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8).isActive = true
+        btnBlueOperative.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        btnBlueOperative.topAnchor.constraint(equalTo: self.txtNameBlueOperative.bottomAnchor, constant: 10).isActive = true
+        btnBlueOperative.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        btnBlueOperative.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8).isActive = true
         
-        txtNameSpymaster.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        txtNameSpymaster.bottomAnchor.constraint(equalTo: self.btnSpymaster.topAnchor, constant: -10).isActive = true
-        txtNameSpymaster.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        txtNameBlueSpymaster.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        txtNameBlueSpymaster.bottomAnchor.constraint(equalTo: self.btnBlueSpymaster.topAnchor, constant: -10).isActive = true
+        txtNameBlueSpymaster.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        btnSpymaster.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        btnSpymaster.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -40).isActive = true
-        btnSpymaster.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        btnSpymaster.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8).isActive = true
+        btnBlueSpymaster.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        btnBlueSpymaster.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -40).isActive = true
+        btnBlueSpymaster.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        btnBlueSpymaster.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8).isActive = true
         
     }
 

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol CardCellDelegate: class {
-    func didTapWordButtonFor(_ card: Card)
+    func didTapWordButtonIn(_ card: Card)
 }
 
 class CardCell: UICollectionViewCell {
@@ -75,7 +75,7 @@ class CardCell: UICollectionViewCell {
     
     @objc func handleWordButtonTapped() {
         guard let card = card else { return }
-        delegate?.didTapWordButtonFor(card)
+        delegate?.didTapWordButtonIn(card)
     }
     
     required init?(coder: NSCoder) {

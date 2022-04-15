@@ -12,6 +12,8 @@ class RedPlayerPanel: UIView {
     private var _redOperativeName: String = ""
     private var _redSpymasterName: String = ""
     
+    public var redTeam = Team(players: [], hasSpymaster: false, color: .Red)
+    
     private let txtNameRedOperative: CustomTextField = {
         let tf = CustomTextField(placeholder: "Name")
         tf.keyboardType = .emailAddress
@@ -30,7 +32,7 @@ class RedPlayerPanel: UIView {
         return tf
     }()
     
-    private let btnRedOperative: UIButton = {
+    let btnRedOperative: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Join as operative", for: .normal)
         button.tintColor = .black
@@ -41,7 +43,7 @@ class RedPlayerPanel: UIView {
         return button
     }()
     
-    private let btnRedSpymaster: UIButton = {
+    let btnRedSpymaster: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Join as spymaster", for: .normal)
         button.tintColor = .black
@@ -92,6 +94,7 @@ class RedPlayerPanel: UIView {
         } else {
             btnRedOperative.isHidden = true
             txtNameRedOperative.text = "Operative: " + name
+            redTeam.players.append(Player(id: 1, name: name, role: "operative"))
         }
     }
     
@@ -104,6 +107,7 @@ class RedPlayerPanel: UIView {
         } else {
             btnRedSpymaster.isHidden = true
             txtNameRedSpymaster.text = "Spymaster: " + name
+            redTeam.players.append(Player(id: 2, name: name, role: "spymaster"))
         }
     }
     

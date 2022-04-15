@@ -11,13 +11,14 @@ import UIKit
 
 class HeaderPanel: UIView {
     
-    private let messageLabel: UILabel = {
+    public let messageLabel: UILabel = {
         let label = UILabel()
         label.text = "label"
         label.textColor = .white
         label.textAlignment = .center
         label.layer.cornerRadius = 5
-        label.backgroundColor = .lightGray
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.backgroundColor = UIColor(named: "LightGreen")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -44,8 +45,8 @@ class HeaderPanel: UIView {
     
     private func applyConstraints() {
         
-        messageLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        messageLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+        messageLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        messageLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor).isActive = true
         messageLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         messageLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
         

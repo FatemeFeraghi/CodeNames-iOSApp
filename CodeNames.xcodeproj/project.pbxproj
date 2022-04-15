@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E883CFBD2807AFA300A8BAEA /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = E883CFBC2807AFA300A8BAEA /* Toast.swift */; };
 		E8A3B5AC27F2A7C4007AFF76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A3B5AB27F2A7C4007AFF76 /* AppDelegate.swift */; };
 		E8A3B5AE27F2A7C4007AFF76 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A3B5AD27F2A7C4007AFF76 /* SceneDelegate.swift */; };
 		E8A3B5B027F2A7C4007AFF76 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A3B5AF27F2A7C4007AFF76 /* ViewController.swift */; };
@@ -29,9 +30,11 @@
 		E8F1627827FF812C00ADF8C0 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1627727FF812C00ADF8C0 /* CustomTextField.swift */; };
 		E8F1627A27FFA4EC00ADF8C0 /* RedPlayerPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1627927FFA4EC00ADF8C0 /* RedPlayerPanel.swift */; };
 		E8F1627E2800D93B00ADF8C0 /* UIView_shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1627D2800D93B00ADF8C0 /* UIView_shake.swift */; };
+		E8F16282280229F500ADF8C0 /* ClueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F16281280229F500ADF8C0 /* ClueCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E883CFBC2807AFA300A8BAEA /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		E8A3B5A827F2A7C4007AFF76 /* CodeNames.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeNames.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8A3B5AB27F2A7C4007AFF76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8A3B5AD27F2A7C4007AFF76 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +59,7 @@
 		E8F1627727FF812C00ADF8C0 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		E8F1627927FFA4EC00ADF8C0 /* RedPlayerPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPlayerPanel.swift; sourceTree = "<group>"; };
 		E8F1627D2800D93B00ADF8C0 /* UIView_shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView_shake.swift; sourceTree = "<group>"; };
+		E8F16281280229F500ADF8C0 /* ClueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClueCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +130,7 @@
 				E8F1627727FF812C00ADF8C0 /* CustomTextField.swift */,
 				E8F1627927FFA4EC00ADF8C0 /* RedPlayerPanel.swift */,
 				E8F1627D2800D93B00ADF8C0 /* UIView_shake.swift */,
+				E8F16281280229F500ADF8C0 /* ClueCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -142,6 +147,7 @@
 		E8A3B5C627F2AD34007AFF76 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E883CFBC2807AFA300A8BAEA /* Toast.swift */,
 				E8A3B5C727F2AD43007AFF76 /* Extensions.swift */,
 			);
 			path = Utils;
@@ -228,8 +234,10 @@
 				E8A3B5B027F2A7C4007AFF76 /* ViewController.swift in Sources */,
 				E8A3B5AC27F2A7C4007AFF76 /* AppDelegate.swift in Sources */,
 				E8F1627827FF812C00ADF8C0 /* CustomTextField.swift in Sources */,
+				E8F16282280229F500ADF8C0 /* ClueCell.swift in Sources */,
 				E8F1627627FF79CC00ADF8C0 /* BluePlayerPanel.swift in Sources */,
 				E8A3B5AE27F2A7C4007AFF76 /* SceneDelegate.swift in Sources */,
+				E883CFBD2807AFA300A8BAEA /* Toast.swift in Sources */,
 				E8A3B5C327F2A843007AFF76 /* MainViewController.swift in Sources */,
 				E8A3B5D027F38488007AFF76 /* Player.swift in Sources */,
 				E8A3B5D227F386FC007AFF76 /* Color.swift in Sources */,

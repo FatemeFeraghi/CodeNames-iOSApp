@@ -32,23 +32,25 @@ class PlayerViewController: UIViewController {
         return button
     }()
     
-    private var redPlayers : [Player] = [
-        Player(id: 1, name: "Fateme", role: "operative"),
-        Player(id: 2, name: "Andres", role: "operative"),
-        Player(id: 3, name: "Urum", role: "operative"),
-        Player(id: 4, name: "Matheus", role: "spymaster")
-    ]
-    private var bluePlayers : [Player] = [
-        Player(id: 1, name: "Fateme", role: "operative"),
-        Player(id: 2, name: "Andres", role: "operative"),
-        Player(id: 3, name: "Urum", role: "operative"),
-        Player(id: 4, name: "Matheus", role: "spymaster")
-    ]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureUI()
+
+    }
+    
+    //Appear the fields to join the game every time the view appears
+    //or user clicks on back button
+    override func viewWillAppear(_ animated: Bool) {
+        bluePlayerPanel.btnBlueSpymaster.isHidden = false
+        bluePlayerPanel.btnBlueOperative.isHidden = false
+        bluePlayerPanel.blueOperativeName = ""
+        bluePlayerPanel.blueSpymasterName = ""
+        
+        redPlayerPanel.btnRedOperative.isHidden = false
+        redPlayerPanel.btnRedSpymaster.isHidden = false
+        redPlayerPanel.redOperativeName = ""
+        redPlayerPanel.redSpymasterName = ""
     }
     
     func configureUI() {
@@ -93,22 +95,14 @@ class PlayerViewController: UIViewController {
     }
     
     @objc func handleStartGameButtonTapped() {
-//        guard let email = emailTextField.text else { return }
-//        guard let password = passwordTextField.text else { return }
-//
-//
-//        if !email.isValidEmail() {
-//
-//            return
-//        }
-//        if password.count < 6 {
-//
-//            return
-//        }
+
+        let blueTeamPlayers = bluePlayerPanel.blueTeam.players
+        let redTeamPlayers = redPlayerPanel.redTeam.players
         
-        print("Debug: \(redPlayerPanel.redOperativeName)")
         let controller = MainViewController()
         navigationController?.pushViewController(controller, animated: true)
+        controller.blueTeamPlayers = blueTeamPlayers
+        controller.redTeamPlayers = redTeamPlayers
     }
 
 

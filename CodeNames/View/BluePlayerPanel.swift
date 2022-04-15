@@ -8,9 +8,11 @@
 import UIKit
 
 class BluePlayerPanel: UIView {
-
+    
     private var _blueOperativeName: String = ""
     private var _blueSpymasterName: String = ""
+    
+    public var blueTeam = Team(players: [], hasSpymaster: false, color: .Blue)
     
     private let txtNameBlueOperative: CustomTextField = {
         let tf = CustomTextField(placeholder: "Name")
@@ -29,7 +31,7 @@ class BluePlayerPanel: UIView {
         return tf
     }()
     
-    private let btnBlueOperative: UIButton = {
+    let btnBlueOperative: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Join as operative", for: .normal)
         button.tintColor = .white
@@ -40,7 +42,7 @@ class BluePlayerPanel: UIView {
         return button
     }()
     
-    private let btnBlueSpymaster: UIButton = {
+    let btnBlueSpymaster: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Join as spymaster", for: .normal)
         button.tintColor = .white
@@ -91,6 +93,7 @@ class BluePlayerPanel: UIView {
         } else {
             btnBlueOperative.isHidden = true
             txtNameBlueOperative.text = "Operative: " + name
+            blueTeam.players.append(Player(id: 1, name: name, role: "operative"))
         }
     }
     
@@ -103,6 +106,7 @@ class BluePlayerPanel: UIView {
         } else {
             btnBlueSpymaster.isHidden = true
             txtNameBlueSpymaster.text = "Spymaster: " + name
+            blueTeam.players.append(Player(id: 2, name: name, role: "spymaster"))
         }
     }
     

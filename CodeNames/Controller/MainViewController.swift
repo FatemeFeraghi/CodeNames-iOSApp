@@ -15,8 +15,8 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
     private let clueCellPanel = ClueCell()
 
     var board : Board?
-    var isSpymaster = true
-    var isBlueTeam = false
+    private var isSpymaster = true
+    private var isBlueTeam = false
     
     public var blueTeamPlayers : [Player] = []
     public var redTeamPlayers : [Player] = []
@@ -26,11 +26,10 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
     
     private var blueScore = 9
     private var redScore = 8
-
-    let clue : Clue = Clue()
-    
-    var isTurnOver = false
-    var numberOfGuesses: Int = 0
+    private var numbers = [Int]()
+    private let clue : Clue = Clue()
+    private var isTurnOver = false
+    private var numberOfGuesses: Int = 0
 
     var messageLabelIsHidden: Bool {
         return (isSpymaster == false) ? true : false
@@ -74,6 +73,7 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
 //        print(blueTeamPlayers[1].name)
         
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.board!.assignKey(size: 3)
     }
@@ -163,10 +163,6 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
 
 }
 
-
-
-private var numbers = [Int]()
-
 // MARK: - UICollectionViewDelegate
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -182,7 +178,10 @@ extension MainViewController: UICollectionViewDelegate {
                 //Team lose game
                 Toast.ok(view: self, title:  "Game Over!", message: "You lose the game", handler: nil)
                 card.color = .Black
+                
                 self.collectionView.reloadData()
+                resetViewsWhenTurnOver()
+                self.headerPanel.messageLabel.backgroundColor = UIColor(named: "DarkGreen")
             }
             if card.color == .Pale {
                 //Oposite teams turn starts

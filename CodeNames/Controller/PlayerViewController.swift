@@ -11,7 +11,7 @@ class PlayerViewController: UIViewController {
 
     private let bluePlayerPanel = BluePlayerPanel()
     private let redPlayerPanel = RedPlayerPanel()
-    private var board : Board = Board(size: 25)
+    public var board : Board = Board(size: 25)
     
     private let titleLabel: UILabel = {
         let label = UILabel()

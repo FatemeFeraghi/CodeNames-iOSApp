@@ -16,6 +16,7 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
 
     var board : Board?
     var isSpymaster = true
+    var isBlueTeam = false
     
     public var blueTeamPlayers : [Player] = []
     public var redTeamPlayers : [Player] = []
@@ -23,8 +24,8 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
 //    lazy var blueTeam = Team(players: blueTeamPlayers, hasSpymaster: true, color: .Blue)
 //    lazy var redTeam = Team(players: redTeamPlayers, hasSpymaster: true, color: .Red)
     
-    private var blueScore = 0
-    private var redScore = 0
+    private var blueScore = 9
+    private var redScore = 8
 
     let clue : Clue = Clue()
     
@@ -50,13 +51,15 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        print("\(board.cards[0].word) + \(board.cards[0].color)")
-//        print("\(board.cards[1].word) + \(board.cards[1].color)")
-//        print("\(board.cards[2].word) + \(board.cards[2].color)")
+        
         configureUI()
+        
+        changeViewColor()
+        self.headerPanel.messageLabel.backgroundColor = .blue
         
         clueCellPanel.delegate = self
         headerPanel.messageLabel.text = displayMessageLabel(clue: clue)
+        
 
 //        if isSpymaster == false {
 //            clueCellPanel.isHidden = true
@@ -112,6 +115,15 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
         
     }
     
+    private func resetViewsWhenTurnOver() {
+        self.isTurnOver = true
+        self.isSpymaster = true
+        self.clueCellPanel.isHidden = false
+        self.clueCellPanel.txtQuantityClue.text = ""
+        self.clueCellPanel.txtWordClue.text = ""
+        self.gameLogPanel.gameLogLabel.text = ""
+    }
+    
     func displayMessageLabel(clue: Clue) -> String {
         return isSpymaster ? "Give your operatives a clue." : "\(clue.word) \(clue.quantity)"
     }
@@ -120,54 +132,109 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
     func didTapWordButtonIn(_ card: Card) {
         print("DEBUG: card tapped")
 
-//        for card in self.board.cards {
-//            if card.color == .Black {
-//                //Team lose game
-//                Toast.show(view: self, title: "Game Over!", message: "You lose the game")
-//            }
-//            if card.color == .Pale {
-//                //Oposite teams turn starts
-//                isTurnOver = true
-//                isSpymaster = true
-//            }
-//
-//        }
         self.gameLogPanel.gameLogLabel.text! += " \n Player taps \(card.word)"
         self.accessibilityActivate()
+    }
+    
+    func changeViewColor() {
+        if isBlueTeam {
+            self.headerPanel.messageLabel.backgroundColor = .blue
+        } else {
+            self.headerPanel.messageLabel.backgroundColor = .red
+        }
     }
     
     // MARK: - GiveClueDelegate
     func spymasterDidGiveClue(_ clue: Clue) {
         
         isSpymaster = false
+        self.collectionView.reloadData()
+        isBlueTeam = !(isBlueTeam)
+        
+        changeViewColor()
+        
         clueCellPanel.isHidden = true
         headerPanel.messageLabel.text = displayMessageLabel(clue: clue)
         self.gameLogPanel.gameLogLabel.text! += "\n Spymaster gives clue: \(clue.word) \(clue.quantity)"
+        
+        numberOfGuesses = clue.quantity
         
     }
 
 }
 
+
+
+private var numbers = [Int]()
+
 // MARK: - UICollectionViewDelegate
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let card = board!.cards[indexPath.row]
+        
+        numbers.append(indexPath.row)
 
-        if card.color == .Black {
-            //Team lose game
-            Toast.ok(view: self, title:  "Game Over!", message: "You lose the game", handler: nil)
-        }
-        if card.color == .Pale {
-            //Oposite teams turn starts
-            isTurnOver = true
-            isSpymaster = true
-            clueCellPanel.isHidden = false
-            clueCellPanel.txtQuantityClue.text = ""
-            clueCellPanel.txtWordClue.text = ""
-            self.gameLogPanel.gameLogLabel.text = ""
-        } else {
+        if numberOfGuesses > 0 {
             
+            numberOfGuesses -= 1
+            
+            if card.color == .Black {
+                //Team lose game
+                Toast.ok(view: self, title:  "Game Over!", message: "You lose the game", handler: nil)
+                card.color = .Black
+                self.collectionView.reloadData()
+            }
+            if card.color == .Pale {
+                //Oposite teams turn starts
+                resetViewsWhenTurnOver()
+                
+                self.collectionView.reloadData()
+            }
+            if card.color == .Blue {
+                if isBlueTeam {
+                    card.color = .Blue
+                    if blueScore == 0 {
+                        Toast.ok(view: self, title:  "Game Over!", message: "You win the game", handler: nil)
+                    } else {
+                        blueScore -= 1
+                    }
+                    
+                } else {
+                    card.color = .Blue
+                    if blueScore == 0 {
+                        Toast.ok(view: self, title:  "Game Over!", message: "You win the game", handler: nil)
+                    } else {
+                        blueScore -= 1
+                    }
+                    resetViewsWhenTurnOver()
+                }
+                self.collectionView.reloadData()
+            }
+            if card.color == .Red {
+                if isBlueTeam {
+                    card.color = .Red
+                    if redScore == 0 {
+                        Toast.ok(view: self, title:  "Game Over!", message: "You win the game", handler: nil)
+                    } else {
+                        redScore -= 1
+                    }
+                    resetViewsWhenTurnOver()
+                    
+                } else {
+                    card.color = .Red
+                    if redScore == 0 {
+                        Toast.ok(view: self, title:  "Game Over!", message: "You win the game", handler: nil)
+                    } else {
+                        redScore -= 1
+                    }
+                }
+                self.collectionView.reloadData()
+            }
         }
+        if numberOfGuesses == 0 {
+            resetViewsWhenTurnOver()
+        }
+       
         
         self.gameLogPanel.gameLogLabel.text! += " \n Player taps \(card.word)"
 
@@ -183,14 +250,16 @@ extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(self.changeSpymasterDebug), userInfo: nil, repeats: true)
+//        Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(self.changeSpymasterDebug), userInfo: nil, repeats: true)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardCellIdentifier, for: indexPath) as! CardCell
         cell.card = self.board!.cards[indexPath.row]
         cell.delegate = self
         
         if(self.isSpymaster == false)
         {
-            cell.backgroundColor = .lightGray
+            if !(numbers.contains(indexPath.row)) {
+                cell.backgroundColor = UIColor(named: "beige")
+            }
         }
         return cell
     }

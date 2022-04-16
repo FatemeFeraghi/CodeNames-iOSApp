@@ -25,31 +25,31 @@ class Board {
     
     //Hard coded list of cards
     var listOfCards: [(Card)] = [
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: ""),
-            Card(color: .Black, word: "")
+            Card(color: .Black, word: "game"),
+            Card(color: .Black, word: "swim"),
+            Card(color: .Black, word: "cook"),
+            Card(color: .Black, word: "fly"),
+            Card(color: .Black, word: "dance"),
+            Card(color: .Black, word: "read"),
+            Card(color: .Black, word: "study"),
+            Card(color: .Black, word: "sing"),
+            Card(color: .Black, word: "fight"),
+            Card(color: .Black, word: "cry"),
+            Card(color: .Black, word: "eat"),
+            Card(color: .Black, word: "drink"),
+            Card(color: .Black, word: "scream"),
+            Card(color: .Black, word: "speak"),
+            Card(color: .Black, word: "walk"),
+            Card(color: .Black, word: "run"),
+            Card(color: .Black, word: "build"),
+            Card(color: .Black, word: "imagine"),
+            Card(color: .Black, word: "draw"),
+            Card(color: .Black, word: "design"),
+            Card(color: .Black, word: "calculate"),
+            Card(color: .Black, word: "paint"),
+            Card(color: .Black, word: "shoot"),
+            Card(color: .Black, word: "sport"),
+            Card(color: .Black, word: "shoes")
         ]
     
     init(size: Int) {
@@ -58,7 +58,7 @@ class Board {
         
         //Call API to set the list of Cards with the required amount here.
         self.cards = listOfCards
-        RandomWordApi.generateWords(amountOfWords: String(self.size), successHandler: randomWordSuccessHandler, failHandler: randomWordFailHandler)
+//        RandomWordApi.generateWords(amountOfWords: String(self.size), successHandler: randomWordSuccessHandler, failHandler: randomWordFailHandler)
 
 
     }

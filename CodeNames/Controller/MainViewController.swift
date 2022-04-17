@@ -14,7 +14,7 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
     private let headerPanel = HeaderPanel()
     private let clueCellPanel = ClueCell()
 
-    var board : Board?
+    public var board : Board?
     private var isSpymaster = true
     private var isBlueTeam = false
     
@@ -58,32 +58,14 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
         
         clueCellPanel.delegate = self
         headerPanel.messageLabel.text = displayMessageLabel(clue: clue)
-        
-
-//        if isSpymaster == false {
-//            clueCellPanel.isHidden = true
-//        } else {
-//            clueCellPanel.isHidden = false
-//        }
-      
-//        print("DEBUG")
-//        print(redTeamPlayers[0].name)
-//        print(redTeamPlayers[1].name)
-//        print(blueTeamPlayers[0].name)
-//        print(blueTeamPlayers[1].name)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.board!.assignKey(size: 3)
     }
     
-    //Function to alternate spymaster boolean value
-    @objc func changeSpymasterDebug()
-    {
-        self.isSpymaster = !(self.isSpymaster)
-        self.collectionView.reloadData()
-    }
+    
+    // MARK: - Helpers
     
     func configureUI() {
         view.backgroundColor = .white
@@ -101,7 +83,7 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
         collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         collectionView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4).isActive = true
-        collectionView.topAnchor.constraint(equalTo: self.headerPanel.topAnchor, constant: 120).isActive = true
+        collectionView.topAnchor.constraint(equalTo: self.headerPanel.topAnchor, constant: 140).isActive = true
         
         clueCellPanel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         clueCellPanel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
@@ -113,6 +95,13 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
         gameLogPanel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         gameLogPanel.topAnchor.constraint(equalTo: self.clueCellPanel.bottomAnchor, constant: 35).isActive = true
         
+    }
+    
+    //Function to alternate spymaster boolean value
+    @objc func changeSpymasterDebug()
+    {
+        self.isSpymaster = !(self.isSpymaster)
+        self.collectionView.reloadData()
     }
     
     private func resetViewsWhenTurnOver() {
@@ -128,14 +117,6 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
         return isSpymaster ? "Give your operatives a clue." : "\(clue.word) \(clue.quantity)"
     }
     
-    // MARK: - CardCellDelegate
-    func didTapWordButtonIn(_ card: Card) {
-        print("DEBUG: card tapped")
-
-        self.gameLogPanel.gameLogLabel.text! += " \n Player taps \(card.word)"
-        self.accessibilityActivate()
-    }
-    
     func changeViewColor() {
         if isBlueTeam {
             self.headerPanel.messageLabel.backgroundColor = .blue
@@ -144,13 +125,32 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
         }
     }
     
+    func displayWinner() {
+        if blueScore == 0 {
+            
+            Toast.ok(view: self, title:  "Blue wins!", message: "Blue team wins the game!", handler: nil)
+        }
+        if redScore == 0 {
+            
+            Toast.ok(view: self, title:  "Red wins!", message: "Red team wins the game!", handler: nil)
+        }
+    }
+    
+    // MARK: - CardCellDelegate
+    func didTapWordButtonIn(_ card: Card) {
+        print("DEBUG: card tapped")
+
+        self.gameLogPanel.gameLogLabel.text! += " \n Player taps \(card.word)"
+        self.accessibilityActivate()
+    }
+    
     // MARK: - GiveClueDelegate
     func spymasterDidGiveClue(_ clue: Clue) {
         
         isSpymaster = false
         self.collectionView.reloadData()
-        isBlueTeam = !(isBlueTeam)
         
+        isBlueTeam = !(isBlueTeam)
         changeViewColor()
         
         clueCellPanel.isHidden = true
@@ -169,7 +169,7 @@ extension MainViewController: UICollectionViewDelegate {
         let card = board!.cards[indexPath.row]
         
         numbers.append(indexPath.row)
-
+        
         if numberOfGuesses > 0 {
             
             numberOfGuesses -= 1
@@ -182,10 +182,13 @@ extension MainViewController: UICollectionViewDelegate {
                 self.collectionView.reloadData()
                 resetViewsWhenTurnOver()
                 self.headerPanel.messageLabel.backgroundColor = UIColor(named: "DarkGreen")
+
             }
             if card.color == .Pale {
                 //Oposite teams turn starts
                 resetViewsWhenTurnOver()
+                
+                changeViewColor()
                 
                 self.collectionView.reloadData()
             }
@@ -196,6 +199,7 @@ extension MainViewController: UICollectionViewDelegate {
                         Toast.ok(view: self, title:  "Game Over!", message: "You win the game", handler: nil)
                     } else {
                         blueScore -= 1
+                        self.headerPanel.lblBlueScore.text = "\(blueScore)"
                     }
                     
                 } else {
@@ -204,6 +208,7 @@ extension MainViewController: UICollectionViewDelegate {
                         Toast.ok(view: self, title:  "Game Over!", message: "You win the game", handler: nil)
                     } else {
                         blueScore -= 1
+                        self.headerPanel.lblBlueScore.text = "\(blueScore)"
                     }
                     resetViewsWhenTurnOver()
                 }
@@ -216,6 +221,7 @@ extension MainViewController: UICollectionViewDelegate {
                         Toast.ok(view: self, title:  "Game Over!", message: "You win the game", handler: nil)
                     } else {
                         redScore -= 1
+                        self.headerPanel.lblRedScore.text = "\(redScore)"
                     }
                     resetViewsWhenTurnOver()
                     
@@ -225,6 +231,7 @@ extension MainViewController: UICollectionViewDelegate {
                         Toast.ok(view: self, title:  "Game Over!", message: "You win the game", handler: nil)
                     } else {
                         redScore -= 1
+                        self.headerPanel.lblRedScore.text = "\(redScore)"
                     }
                 }
                 self.collectionView.reloadData()
@@ -234,7 +241,6 @@ extension MainViewController: UICollectionViewDelegate {
             resetViewsWhenTurnOver()
         }
        
-        
         self.gameLogPanel.gameLogLabel.text! += " \n Player taps \(card.word)"
 
     }
@@ -249,12 +255,14 @@ extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        displayWinner()
+        
 //        Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(self.changeSpymasterDebug), userInfo: nil, repeats: true)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardCellIdentifier, for: indexPath) as! CardCell
         cell.card = self.board!.cards[indexPath.row]
         cell.delegate = self
         
-        if(self.isSpymaster == false)
+        if !isSpymaster
         {
             if !(numbers.contains(indexPath.row)) {
                 cell.backgroundColor = UIColor(named: "beige")

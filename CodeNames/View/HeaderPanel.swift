@@ -22,6 +22,33 @@ class HeaderPanel: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    
+    public let lblBlueScore: UILabel = {
+        let label = UILabel()
+        label.text = "9"
+        label.textColor = .white
+        label.backgroundColor = .blue
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 17)
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 12
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    public let lblRedScore: UILabel = {
+        let label = UILabel()
+        label.text = "8"
+        label.textColor = .white
+        label.backgroundColor = .red
+        label.textAlignment = .center
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 12
+        label.font = UIFont.systemFont(ofSize: 17)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,7 +59,7 @@ class HeaderPanel: UIView {
     private func initialize() {
 
         self.translatesAutoresizingMaskIntoConstraints = false
-        addSubviews(messageLabel)
+        addSubviews(messageLabel, lblBlueScore, lblRedScore)
 
         self.backgroundColor = UIColor(named: "beige")
 
@@ -50,5 +77,16 @@ class HeaderPanel: UIView {
         messageLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         messageLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
+        
+        lblBlueScore.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        lblBlueScore.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.3).isActive = true
+        lblBlueScore.topAnchor.constraint(equalTo: self.messageLabel.bottomAnchor, constant: 20).isActive = true
+        lblBlueScore.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        
+        
+        lblRedScore.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        lblRedScore.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.3).isActive = true
+        lblRedScore.topAnchor.constraint(equalTo: self.messageLabel.bottomAnchor, constant: 20).isActive = true
+        lblRedScore.heightAnchor.constraint(equalToConstant: 32).isActive = true
     }
 }

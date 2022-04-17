@@ -140,8 +140,16 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
     func didTapWordButtonIn(_ card: Card) {
         print("DEBUG: card tapped")
 
-        self.gameLogPanel.gameLogLabel.text! += " \n Player taps \(card.word)"
-        self.accessibilityActivate()
+        if(isSpymaster == false)
+        {
+            self.gameLogPanel.gameLogLabel.text! += " \n Player taps \(card.word)"
+            self.accessibilityActivate()
+        }
+//        else
+//        {
+//            self.gameLogPanel.gameLogLabel.text! = "Game Log:"
+//        }
+   
     }
     
     // MARK: - GiveClueDelegate
@@ -168,10 +176,10 @@ extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let card = board!.cards[indexPath.row]
         
-        numbers.append(indexPath.row)
-        
-        if numberOfGuesses > 0 {
-            
+        if(isSpymaster == false && numberOfGuesses > 0)
+        {
+            numbers.append(indexPath.row)
+
             numberOfGuesses -= 1
             
             if card.color == .Black {
@@ -236,12 +244,17 @@ extension MainViewController: UICollectionViewDelegate {
                 }
                 self.collectionView.reloadData()
             }
+            self.gameLogPanel.gameLogLabel.text! += " \n Player taps \(card.word)"
+            
         }
+//        else
+//        {
+//            self.gameLogPanel.gameLogLabel.text! = "Game Log:"
+//        }
         if numberOfGuesses == 0 {
             resetViewsWhenTurnOver()
         }
        
-        self.gameLogPanel.gameLogLabel.text! += " \n Player taps \(card.word)"
 
     }
 }

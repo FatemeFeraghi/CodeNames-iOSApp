@@ -59,6 +59,7 @@ class Board {
         //Call API to set the list of Cards with the required amount here.
         self.cards = listOfCards
 //        RandomWordApi.generateWords(amountOfWords: String(self.size), successHandler: randomWordSuccessHandler, failHandler: randomWordFailHandler)
+        CustomRandomWordApi.generateWords(amountOfWords: String(self.size), successHandler: customRandomWordSuccessHandler, failHandler: customRandomWordFailHandler)
 
 
     }
@@ -121,9 +122,6 @@ class Board {
             }while(isCorrect == false)
         }
         
-        
-
-        
     }
     
     func setCards(key: [Int], cards: [Card]) {
@@ -133,6 +131,8 @@ class Board {
     func createBoard(size: Int) {
 
     }
+    
+    //MARK: - Random Word Api
     
     func randomWordSuccessHandler(_ httpStatusCode : Int, _ response : [String])
     {
@@ -150,6 +150,7 @@ class Board {
             for word in self.arrayOfRandomWords! {
                 //print("\(word) - \(type(of: word))")
                 DictionaryApi.checkWordExistance(word: word, successHandler: checkExistanceSuccessHandler, failHandler: checkExistanceFailHandler)
+                
             }
             
             let sizeOfArray = self.finalWords?.count == nil ? 0 : self.finalWords!.count
@@ -177,6 +178,8 @@ class Board {
     {
         print("Error")
     }
+    
+    //MARK: - Dictionary API
     func checkExistanceSuccessHandler(_ word : String, _ response : [Word])
     {
         let sizeOfArray = self.finalWords?.count == nil ? 0 : self.finalWords!.count
@@ -201,5 +204,65 @@ class Board {
     func checkExistanceFailHandler( _ errorMessage: String)
     {
         print(errorMessage)
+    }
+    
+    //MARK: - Custom Random Word API
+    func customRandomWordSuccessHandler(_ httpStatusCode : Int, _ response : [String])
+    {
+        if httpStatusCode == 200
+        {
+            guard let current = response as? [String]
+            else
+            {
+                return
+            }
+            print(current)
+            
+            //Now iterate and check if they are real words
+            self.arrayOfRandomWords = current
+            for word in self.arrayOfRandomWords! {
+                
+                let sizeOfArray = self.finalWords?.count == nil ? 0 : self.finalWords!.count
+                if(sizeOfArray < self.size)
+                {
+                    if(word.count <= 8)
+                    {
+                        //The ternary operator was used to fix the problem of adding an element to a nil array at first
+                        self.finalWords?.count == nil ? self.finalWords = [word] : self.finalWords!.append(word)
+
+                        //Setting the word for each card
+                        self.listOfCards[sizeOfArray].word = word
+
+                        print("\nDictionary response -> \(response) - \(type(of: response[0]))")
+                    }
+                }
+
+                
+            }
+            
+            let sizeOfArray = self.finalWords?.count == nil ? 0 : self.finalWords!.count
+            let checkSize = self.size - sizeOfArray
+
+            //After all the words in the arrayOfRandomWords were checked on the dictionary, we will check if we already have the amount of words we needed.
+            if(checkSize > 0)
+            {
+                //The array does not have the required amount of cards, call the API again to generate more words
+                CustomRandomWordApi.generateWords(amountOfWords: String(self.size), successHandler: customRandomWordSuccessHandler, failHandler: customRandomWordFailHandler)
+            }
+            else
+            {
+                //This else will be executed when all the cards already were set with a word
+                print(self.finalWords!)
+
+
+                //Call function to randomically distribute the cards
+                self.assignKey(size: size)
+            }
+        }
+        
+    }
+    func customRandomWordFailHandler(_ httpStatusCode : Int, _ errorMessage: String)
+    {
+        print("Error")
     }
 }

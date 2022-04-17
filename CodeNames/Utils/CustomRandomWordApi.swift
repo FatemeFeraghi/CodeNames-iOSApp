@@ -1,4 +1,13 @@
 //
+//  CustomRandomWordApi.swift
+//  CodeNames
+//
+//  Created by Matheus Cadena on 2022-04-17.
+//
+
+import Foundation
+
+//
 //  RandomWordApi.swift
 //  CodeNames
 //
@@ -8,16 +17,14 @@
 import Foundation
 import UIKit
 
-class RandomWordApi: Decodable {
+class CustomRandomWordApi: Decodable {
 
    static func generateWords(amountOfWords : String,
                              successHandler: @escaping (_ httpStatusCode : Int, _ response : [String]) -> Void,
                              failHandler : @escaping (_ httpStatusCode : Int, _ errorMessage: String) -> Void)
     {
-//    https://random-word-api.herokuapp.com/word?number=\20&swear=0
 //    http://localhost:8080/words?quantity=25
-//        let baseURL = "https://random-word-api.herokuapp.com/"
-//        let endPoint = "word?quantity=\(amountOfWords)"
+
         
         //Second API attempt
         let baseURL = "http://localhost:8080/"
@@ -34,17 +41,17 @@ class RandomWordApi: Decodable {
 }
 
 
-struct ArrayOfRandomWordsCurrent : Codable {
+struct ArrayOfRandomWordsCustom : Codable {
     
     var arrayOfWords : [String]
     
     
-    static func decode( json : [String : Any] ) -> ArrayOfRandomWordsCurrent? {
+    static func decode( json : [String : Any] ) -> ArrayOfRandomWordsCustom? {
         
         let decoder = JSONDecoder()
         do{
             let data = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
-            let object = try decoder.decode(ArrayOfRandomWordsCurrent.self, from: data)
+            let object = try decoder.decode(ArrayOfRandomWordsCustom.self, from: data)
             return object
         }catch{
             

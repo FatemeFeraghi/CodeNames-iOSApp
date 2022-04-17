@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C931F9F5280C9046007B2DD5 /* CustomRandomWordApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C931F9F4280C9046007B2DD5 /* CustomRandomWordApi.swift */; };
 		E883CFBD2807AFA300A8BAEA /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = E883CFBC2807AFA300A8BAEA /* Toast.swift */; };
 		E883CFBF280A171800A8BAEA /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = E883CFBE280A171800A8BAEA /* Word.swift */; };
 		E883CFC1280A176100A8BAEA /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = E883CFC0280A176100A8BAEA /* API.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C931F9F4280C9046007B2DD5 /* CustomRandomWordApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRandomWordApi.swift; sourceTree = "<group>"; };
 		E883CFBC2807AFA300A8BAEA /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		E883CFBE280A171800A8BAEA /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		E883CFC0280A176100A8BAEA /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				E883CFC0280A176100A8BAEA /* API.swift */,
 				E883CFC2280A179400A8BAEA /* RandomWordApi.swift */,
 				E883CFC4280A17BC00A8BAEA /* DictionaryApi.swift */,
+				C931F9F4280C9046007B2DD5 /* CustomRandomWordApi.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				E8A3B5D227F386FC007AFF76 /* Color.swift in Sources */,
 				E883CFBF280A171800A8BAEA /* Word.swift in Sources */,
 				E8F1627E2800D93B00ADF8C0 /* UIView_shake.swift in Sources */,
+				C931F9F5280C9046007B2DD5 /* CustomRandomWordApi.swift in Sources */,
 				E8A3B5DC27F38C21007AFF76 /* Clue.swift in Sources */,
 				E8A3B5CA27F2C1A4007AFF76 /* HeaderPanel.swift in Sources */,
 				E8F1627427FF78FC00ADF8C0 /* PlayerViewController.swift in Sources */,

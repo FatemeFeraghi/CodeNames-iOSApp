@@ -16,7 +16,7 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
 
     public var board : Board?
     private var isSpymaster = true
-    private var isBlueTeam = false
+    private var isBlueTeam = true
     
     public var blueTeamPlayers : [Player] = []
     public var redTeamPlayers : [Player] = []
@@ -54,7 +54,7 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
         configureUI()
         
         changeViewColor()
-        self.headerPanel.messageLabel.backgroundColor = .blue
+
         
         clueCellPanel.delegate = self
         headerPanel.messageLabel.text = displayMessageLabel(clue: clue)
@@ -111,6 +111,12 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
         self.clueCellPanel.txtQuantityClue.text = ""
         self.clueCellPanel.txtWordClue.text = ""
         self.gameLogPanel.gameLogLabel.text = ""
+        
+        isBlueTeam = !(isBlueTeam)
+        changeViewColor()
+
+        self.collectionView.reloadData()
+
     }
     
     func displayMessageLabel(clue: Clue) -> String {
@@ -123,6 +129,7 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
         } else {
             self.headerPanel.messageLabel.backgroundColor = .red
         }
+
     }
     
     func displayWinner() {
@@ -158,8 +165,6 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
         isSpymaster = false
         self.collectionView.reloadData()
         
-        isBlueTeam = !(isBlueTeam)
-        changeViewColor()
         
         clueCellPanel.isHidden = true
         headerPanel.messageLabel.text = displayMessageLabel(clue: clue)
@@ -175,6 +180,7 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let card = board!.cards[indexPath.row]
+        var roundIsOver : Bool = false
         
         if(isSpymaster == false && numberOfGuesses > 0)
         {
@@ -194,10 +200,8 @@ extension MainViewController: UICollectionViewDelegate {
             }
             if card.color == .Pale {
                 //Oposite teams turn starts
-                resetViewsWhenTurnOver()
-                
-                changeViewColor()
-                
+                roundIsOver = true
+                                
                 self.collectionView.reloadData()
             }
             if card.color == .Blue {
@@ -218,7 +222,7 @@ extension MainViewController: UICollectionViewDelegate {
                         blueScore -= 1
                         self.headerPanel.lblBlueScore.text = "\(blueScore)"
                     }
-                    resetViewsWhenTurnOver()
+                    roundIsOver = true
                 }
                 self.collectionView.reloadData()
             }
@@ -231,7 +235,7 @@ extension MainViewController: UICollectionViewDelegate {
                         redScore -= 1
                         self.headerPanel.lblRedScore.text = "\(redScore)"
                     }
-                    resetViewsWhenTurnOver()
+                    roundIsOver = true
                     
                 } else {
                     card.color = .Red
@@ -251,7 +255,7 @@ extension MainViewController: UICollectionViewDelegate {
 //        {
 //            self.gameLogPanel.gameLogLabel.text! = "Game Log:"
 //        }
-        if numberOfGuesses == 0 {
+        if ((numberOfGuesses == 0 || roundIsOver == true) && isSpymaster == false ) {
             resetViewsWhenTurnOver()
         }
        
@@ -275,6 +279,8 @@ extension MainViewController: UICollectionViewDataSource {
         cell.card = self.board!.cards[indexPath.row]
         cell.delegate = self
         
+//        changeViewColor()
+
         if !isSpymaster
         {
             if !(numbers.contains(indexPath.row)) {

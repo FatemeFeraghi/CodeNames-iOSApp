@@ -111,7 +111,7 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
         self.clueCellPanel.isHidden = false
         self.clueCellPanel.txtQuantityClue.text = ""
         self.clueCellPanel.txtWordClue.text = ""
-        self.gameLogPanel.gameLogLabel.text = ""
+//        self.gameLogPanel.gameLogLabel.text = ""
         
         isBlueTeam = !(isBlueTeam)
         messageRoundIsOver()
@@ -206,9 +206,12 @@ extension MainViewController: UICollectionViewDelegate {
                 card.color = .Black
                 
                 self.collectionView.reloadData()
+                
                 resetViewsWhenTurnOver()
-                self.headerPanel.messageLabel.backgroundColor = UIColor(named: "DarkGreen")
 
+                self.gameLogPanel.gameLogLabel.text = ""
+                
+                self.headerPanel.messageLabel.backgroundColor = UIColor(named: "DarkGreen")
             }
             if card.color == .Pale {
                 //Oposite teams turn starts

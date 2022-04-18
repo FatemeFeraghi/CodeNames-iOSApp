@@ -9,16 +9,16 @@ import UIKit
 
 class GameLogPanel: UIView {
     
-    public var gameLogLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Game Log:"
-        label.textColor = .black
-        label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.numberOfLines = 10
-        label.backgroundColor = UIColor(named: "LightGrey")
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    public var gameLogLabel: UITextView = {
+        let tv = UITextView()
+        tv.alpha = 1.0
+        tv.text = "Game Log:"
+        tv.textColor = .black
+        tv.textAlignment = .center
+        tv.font = UIFont.boldSystemFont(ofSize: 14)
+        tv.backgroundColor = UIColor(named: "LightGrey")
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        return tv
     }()
 
     override init(frame: CGRect) {

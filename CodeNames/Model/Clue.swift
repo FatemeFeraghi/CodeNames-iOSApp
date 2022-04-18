@@ -12,10 +12,6 @@ struct Clue {
     let quantity: Int
     let word: String
     
-    func validateClue(){
-        
-    }
-    
     init() {
         self.quantity = 0
         self.word = "Default clue"

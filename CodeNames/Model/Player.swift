@@ -16,14 +16,6 @@ class Player {
         return ""
     }
     
-    func tapCard() {
-        
-    }
-    
-    func endGuess() {
-        
-    }
-    
     init(id: Int, name: String, role: String) {
         self.id = id
         self.name = name

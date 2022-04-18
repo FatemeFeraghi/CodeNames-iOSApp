@@ -10,7 +10,7 @@ import UIKit
 
 class Board {
     var size: Int
-    var cards: [Card]
+    public var cards: [Card]
     var key: [Int]
     
     //Variables with hard coded proportions of cards for a 25-card board size
@@ -45,7 +45,7 @@ class Board {
             Card(color: .Black, word: "imagine"),
             Card(color: .Black, word: "draw"),
             Card(color: .Black, word: "design"),
-            Card(color: .Black, word: "calculate"),
+            Card(color: .Black, word: "car"),
             Card(color: .Black, word: "paint"),
             Card(color: .Black, word: "shoot"),
             Card(color: .Black, word: "sport"),
@@ -55,6 +55,7 @@ class Board {
     init(size: Int) {
         self.size =  size
         self.key = [size]
+        
         
         //Call API to set the list of Cards with the required amount here.
         self.cards = listOfCards
@@ -122,14 +123,6 @@ class Board {
             }while(isCorrect == false)
         }
         
-    }
-    
-    func setCards(key: [Int], cards: [Card]) {
-        
-    }
-    
-    func createBoard(size: Int) {
-
     }
     
     //MARK: - Random Word Api

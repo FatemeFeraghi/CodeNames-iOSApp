@@ -53,6 +53,7 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
         
         configureUI()
         
+        Toast.ok(view: self, title:  "Game will Start", message: "Blue Spymaster, please give a clue", handler: nil)
         changeViewColor()
 
         
@@ -113,7 +114,9 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
         self.gameLogPanel.gameLogLabel.text = ""
         
         isBlueTeam = !(isBlueTeam)
+        messageRoundIsOver()
         changeViewColor()
+        
 
         self.collectionView.reloadData()
 
@@ -123,6 +126,15 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
         return isSpymaster ? "Give your operatives a clue." : "\(clue.word) \(clue.quantity)"
     }
     
+    func messageRoundIsOver()
+    {
+        if isBlueTeam {
+            Toast.ok(view: self, title:  "Round is over", message: "Blue Spymaster, please give a clue", handler: nil)
+        } else {
+            Toast.ok(view: self, title:  "Round is over", message: "Red Spymaster, please give a clue", handler: nil)
+        }
+
+    }
     func changeViewColor() {
         if isBlueTeam {
             self.headerPanel.messageLabel.backgroundColor = .blue

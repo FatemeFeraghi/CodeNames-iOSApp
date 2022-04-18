@@ -103,7 +103,7 @@ class PlayerViewController: UIViewController {
         
         guard   blueTeamPlayers.count == 2,
                 redTeamPlayers.count == 2
-                
+
         else
         {
             btnStartGame.shake()

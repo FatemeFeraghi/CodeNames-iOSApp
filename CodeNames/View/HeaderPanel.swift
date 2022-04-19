@@ -17,7 +17,7 @@ class HeaderPanel: UIView {
         label.textColor = .white
         label.textAlignment = .center
         label.layer.cornerRadius = 5
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 21)
         label.backgroundColor = UIColor(named: "LightGreen")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -30,7 +30,7 @@ class HeaderPanel: UIView {
         label.textColor = .white
         label.backgroundColor = .blue
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 21)
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 12
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -45,7 +45,7 @@ class HeaderPanel: UIView {
         label.textAlignment = .center
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 12
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 21)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -61,8 +61,6 @@ class HeaderPanel: UIView {
         self.translatesAutoresizingMaskIntoConstraints = false
         addSubviews(messageLabel, lblBlueScore, lblRedScore)
 
-        self.backgroundColor = UIColor(named: "beige")
-
         applyConstraints()
     }
     
@@ -74,19 +72,19 @@ class HeaderPanel: UIView {
         
         messageLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
         messageLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        messageLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        messageLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        messageLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
+        messageLabel.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.12).isActive = true
         
         
         lblBlueScore.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         lblBlueScore.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.3).isActive = true
-        lblBlueScore.topAnchor.constraint(equalTo: self.messageLabel.bottomAnchor, constant: 20).isActive = true
-        lblBlueScore.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        lblBlueScore.topAnchor.constraint(equalTo: self.messageLabel.bottomAnchor, constant: 10).isActive = true
+        lblBlueScore.heightAnchor.constraint(equalTo: self.lblBlueScore.widthAnchor, multiplier: 0.25).isActive = true
         
         
         lblRedScore.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         lblRedScore.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.3).isActive = true
-        lblRedScore.topAnchor.constraint(equalTo: self.messageLabel.bottomAnchor, constant: 20).isActive = true
-        lblRedScore.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        lblRedScore.topAnchor.constraint(equalTo: self.messageLabel.bottomAnchor, constant: 10).isActive = true
+        lblRedScore.heightAnchor.constraint(equalTo: self.lblRedScore.widthAnchor, multiplier: 0.25).isActive = true
     }
 }

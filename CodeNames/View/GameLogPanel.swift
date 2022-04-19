@@ -15,7 +15,7 @@ class GameLogPanel: UIView {
         tv.text = "Game Log:"
         tv.textColor = .black
         tv.textAlignment = .center
-        tv.font = UIFont.boldSystemFont(ofSize: 14)
+        tv.font = UIFont.boldSystemFont(ofSize: 17)
         tv.backgroundColor = UIColor(named: "LightGrey")
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv

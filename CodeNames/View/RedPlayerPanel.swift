@@ -38,6 +38,7 @@ class RedPlayerPanel: UIView {
         button.tintColor = .black
         button.backgroundColor = .red
         button.layer.cornerRadius = 12
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleRedOperativeButtonTapped), for: .touchUpInside)
         return button
@@ -49,6 +50,7 @@ class RedPlayerPanel: UIView {
         button.tintColor = .black
         button.backgroundColor = .red
         button.layer.cornerRadius = 12
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleRedSpymasterButtonTapped), for: .touchUpInside)
         return button
@@ -136,8 +138,8 @@ class RedPlayerPanel: UIView {
         
         btnRedOperative.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor).isActive = true
         btnRedOperative.topAnchor.constraint(equalTo: self.txtNameRedOperative.bottomAnchor, constant: 10).isActive = true
-        btnRedOperative.heightAnchor.constraint(equalToConstant: 40).isActive = true
         btnRedOperative.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8).isActive = true
+        btnRedOperative.heightAnchor.constraint(equalTo: self.btnRedOperative.widthAnchor, multiplier: 0.3).isActive = true
         
         txtNameRedSpymaster.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor).isActive = true
         txtNameRedSpymaster.bottomAnchor.constraint(equalTo: self.btnRedSpymaster.topAnchor, constant: -10).isActive = true
@@ -145,8 +147,8 @@ class RedPlayerPanel: UIView {
         
         btnRedSpymaster.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor).isActive = true
         btnRedSpymaster.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -40).isActive = true
-        btnRedSpymaster.heightAnchor.constraint(equalToConstant: 40).isActive = true
         btnRedSpymaster.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8).isActive = true
+        btnRedSpymaster.heightAnchor.constraint(equalTo: self.btnRedSpymaster.widthAnchor, multiplier: 0.3).isActive = true
         
     }
 

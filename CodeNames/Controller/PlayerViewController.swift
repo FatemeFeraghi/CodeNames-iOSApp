@@ -100,15 +100,15 @@ class PlayerViewController: UIViewController {
         let blueTeamPlayers = bluePlayerPanel.blueTeam.players
         let redTeamPlayers = redPlayerPanel.redTeam.players
 
-//
-//        guard   blueTeamPlayers.count == 2,
-//                redTeamPlayers.count == 2
-//
-//        else
-//        {
-//            btnStartGame.shake()
-//            return
-//        }
+
+        guard   blueTeamPlayers.count == 2,
+                redTeamPlayers.count == 2
+
+        else
+        {
+            btnStartGame.shake()
+            return
+        }
 
 
         let controller = MainViewController()

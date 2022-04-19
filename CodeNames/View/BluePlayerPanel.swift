@@ -37,6 +37,7 @@ class BluePlayerPanel: UIView {
         button.tintColor = .white
         button.backgroundColor = .blue
         button.layer.cornerRadius = 12
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleBlueOperativeButtonTapped), for: .touchUpInside)
         return button
@@ -48,6 +49,7 @@ class BluePlayerPanel: UIView {
         button.tintColor = .white
         button.backgroundColor = .blue
         button.layer.cornerRadius = 12
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleBlueSpymasterButtonTapped), for: .touchUpInside)
         return button
@@ -136,8 +138,9 @@ class BluePlayerPanel: UIView {
         
         btnBlueOperative.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor).isActive = true
         btnBlueOperative.topAnchor.constraint(equalTo: self.txtNameBlueOperative.bottomAnchor, constant: 10).isActive = true
-        btnBlueOperative.heightAnchor.constraint(equalToConstant: 40).isActive = true
         btnBlueOperative.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8).isActive = true
+        btnBlueOperative.heightAnchor.constraint(equalTo: self.btnBlueOperative.widthAnchor, multiplier: 0.3).isActive = true
+
         
         txtNameBlueSpymaster.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor).isActive = true
         txtNameBlueSpymaster.bottomAnchor.constraint(equalTo: self.btnBlueSpymaster.topAnchor, constant: -10).isActive = true
@@ -145,8 +148,8 @@ class BluePlayerPanel: UIView {
         
         btnBlueSpymaster.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor).isActive = true
         btnBlueSpymaster.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -40).isActive = true
-        btnBlueSpymaster.heightAnchor.constraint(equalToConstant: 40).isActive = true
         btnBlueSpymaster.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8).isActive = true
+        btnBlueSpymaster.heightAnchor.constraint(equalTo: self.btnBlueOperative.widthAnchor, multiplier: 0.3).isActive = true
         
     }
 

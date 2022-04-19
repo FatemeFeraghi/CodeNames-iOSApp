@@ -35,6 +35,7 @@ class CardCell: UICollectionViewCell {
         button.tintColor = .black
         button.backgroundColor = .white
         button.layer.cornerRadius = 1
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleWordButtonTapped), for: .touchUpInside)
         return button
@@ -92,8 +93,8 @@ class CardCell: UICollectionViewCell {
         
         cardImageView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant:  -5).isActive = true
         cardImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-        cardImageView.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        cardImageView.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        cardImageView.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.3).isActive = true
+        cardImageView.heightAnchor.constraint(equalTo: self.cardImageView.widthAnchor).isActive = true
         
         divider.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 5).isActive = true
         divider.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
@@ -103,7 +104,7 @@ class CardCell: UICollectionViewCell {
         wordButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -5).isActive = true
         wordButton.leadingAnchor.constraint(equalTo: divider.leadingAnchor, constant: 5).isActive = true
         wordButton.trailingAnchor.constraint(equalTo: cardImageView.trailingAnchor).isActive = true
-        wordButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        wordButton.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4).isActive = true
     }
     
     func configure() {

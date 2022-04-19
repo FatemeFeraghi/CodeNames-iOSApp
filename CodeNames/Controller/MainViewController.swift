@@ -77,24 +77,25 @@ class MainViewController: UIViewController, CardCellDelegate, GiveClueDelegate {
         headerPanel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         headerPanel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         headerPanel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        headerPanel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.15).isActive = true
         
         collectionView.delegate = self
         collectionView.dataSource = self
         
         collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        collectionView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4).isActive = true
-        collectionView.topAnchor.constraint(equalTo: self.headerPanel.topAnchor, constant: 140).isActive = true
+        collectionView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.5).isActive = true
+        collectionView.topAnchor.constraint(equalTo: self.headerPanel.bottomAnchor, constant: 30).isActive = true
         
         clueCellPanel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         clueCellPanel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        clueCellPanel.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        clueCellPanel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.08).isActive = true
         clueCellPanel.topAnchor.constraint(equalTo: self.collectionView.bottomAnchor, constant: 5).isActive = true
         
         gameLogPanel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         gameLogPanel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         gameLogPanel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        gameLogPanel.topAnchor.constraint(equalTo: self.clueCellPanel.bottomAnchor, constant: 35).isActive = true
+        gameLogPanel.topAnchor.constraint(equalTo: self.clueCellPanel.bottomAnchor, constant: 15).isActive = true
         
     }
     
@@ -320,7 +321,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         let width = (view.frame.width - 5) / 5
-        let height = (view.frame.width) / 7
+        let height = (view.frame.height - 5) / 12
         return CGSize(width: width, height: height)
     }
 }

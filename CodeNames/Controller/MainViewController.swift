@@ -221,19 +221,27 @@ extension MainViewController: UICollectionViewDelegate {
                 self.collectionView.reloadData()
             }
             if card.color == .Blue {
+                blueScore -= 1
+                self.headerPanel.lblBlueScore.text = "\(blueScore)"
                 if isBlueTeam {
                     card.color = .Blue
+
                     if blueScore == 0 {
-                        Toast.ok(view: self, title:  "Game Over!", message: "You win the game", handler: nil)
+
+                        displayWinner()
+                        
                     } else {
-                        blueScore -= 1
-                        self.headerPanel.lblBlueScore.text = "\(blueScore)"
+//                        blueScore -= 1
+//                        self.headerPanel.lblBlueScore.text = "\(blueScore)"
                     }
                     
                 } else {
                     card.color = .Blue
+                    
                     if blueScore == 0 {
-                        Toast.ok(view: self, title:  "Game Over!", message: "You win the game", handler: nil)
+
+                        displayWinner()
+                        
                     } else {
                         blueScore -= 1
                         self.headerPanel.lblBlueScore.text = "\(blueScore)"
@@ -243,20 +251,25 @@ extension MainViewController: UICollectionViewDelegate {
                 self.collectionView.reloadData()
             }
             if card.color == .Red {
+                redScore -= 1
+                self.headerPanel.lblRedScore.text = "\(redScore)"
                 if isBlueTeam {
                     card.color = .Red
+
                     if redScore == 0 {
-                        Toast.ok(view: self, title:  "Game Over!", message: "You win the game", handler: nil)
+
+                        displayWinner()
                     } else {
-                        redScore -= 1
-                        self.headerPanel.lblRedScore.text = "\(redScore)"
+//                        redScore -= 1
+//                        self.headerPanel.lblRedScore.text = "\(redScore)"
                     }
                     roundIsOver = true
                     
                 } else {
                     card.color = .Red
                     if redScore == 0 {
-                        Toast.ok(view: self, title:  "Game Over!", message: "You win the game", handler: nil)
+
+                        displayWinner()
                     } else {
                         redScore -= 1
                         self.headerPanel.lblRedScore.text = "\(redScore)"
@@ -267,10 +280,6 @@ extension MainViewController: UICollectionViewDelegate {
             self.gameLogPanel.gameLogLabel.text! += " \n Player taps \(card.word)"
             
         }
-//        else
-//        {
-//            self.gameLogPanel.gameLogLabel.text! = "Game Log:"
-//        }
         if ((numberOfGuesses == 0 || roundIsOver == true) && isSpymaster == false ) {
             resetViewsWhenTurnOver()
         }
@@ -288,7 +297,7 @@ extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        displayWinner()
+//        displayWinner()
         
 //        Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(self.changeSpymasterDebug), userInfo: nil, repeats: true)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardCellIdentifier, for: indexPath) as! CardCell
